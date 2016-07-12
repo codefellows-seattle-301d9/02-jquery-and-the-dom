@@ -13,6 +13,7 @@ function Article (opts) {
 
 Article.prototype.toHtml = function () { //defines ".toHtml" to "Article" just this one time; Reference.
   var $newArticle = $('article.template').clone(); //"var $whatever" will contain a jQuery object.
+  $newArticle.removeClass();
   $newArticle.attr('data-category', this.category);
   $newArticle.find('h1').text(this.title);
   $newArticle.find('a').text(this.author);
@@ -41,10 +42,10 @@ ourLocalData.sort(function(a,b) { //check about .sort() on MDN
   return (new Date(b.publishedOn)) - (new Date(a.publishedOn));
 });
 
-// ourLocalData.forEach(function(ele) { //"ele" refers to each of the elements in local data; Placeholder.
-//   articles.push(new Article(ele));
-// });
-//
-// articles.forEach(function(a) {
-//   $('#articles').append(a.toHtml());
-// });
+ourLocalData.forEach(function(ele) { //"ele" refers to each of the elements in local data; Placeholder.
+  articles.push(new Article(ele));
+});
+
+articles.forEach(function(a) {
+  $('#articles').append(a.toHtml());
+});
