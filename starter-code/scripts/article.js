@@ -11,16 +11,16 @@ function Article (opts) {
   this.body = opts.body;
 }
 
-Article.prototype.toHtml = funtion() {
+Article.prototype.toHtml = function() {
   var $newArticle = $('article.template').clone();
   $newArticle.attr('data-category', this.category);
-  $('h1:contains("Title")').text(this.title);
-  $newArticle.attr('href', this.authorURL);
-  $('a:contains("Author Name")').text(this.author);
-  $('time:contains("Publish Time")').text(this.publishedOn);
-  $('.article-body').text(this.body);
+  $newArticle.find('h1').text(this.title);
+  $newArticle.find('a[href]').html(this.authorURL);
+  $newArticle.find('a').text(this.author);
+  $newArticle.find('time').text(this.publishedOn);
+  $newArticle.find('.article-body').html(this.body);
 
-  /*TODO: Now use jQuery to fill in the rest of the current template clone with properties from this particular Article instance.
+  /*DONE: Now use jQuery to fill in the rest of the current template clone with properties from this particular Article instance.
   We need to fill in:
   1.author name,
   2. author url,
@@ -33,12 +33,12 @@ Article.prototype.toHtml = funtion() {
 
   /* DONE: This clone article is no longer a template, as it now has real data attached to it!
   We need to account for that before this current article gets rendered to our DOM */
-  $newArticle.attr('class', 'blog_entry');
+  $newArticle.removeClass('template').addClass('blog_entry');
 
-  return(newArticle);
+  return($newArticle);
 };
 
-ourLocalData.sort(fucntion(a,b) {
+ourLocalData.sort(function(a,b) {
   return (new Date(b.publishedOn)) - (new Date(a.publishedOn));
 });
 
