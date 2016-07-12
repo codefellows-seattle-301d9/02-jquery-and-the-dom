@@ -13,7 +13,12 @@ function Article (opts) {
 
 Article.prototype.toHtml = funtion() {
   var $newArticle = $('article.template').clone();
-  $newArticle.attr('data-catagory', this.catagory);
+  $newArticle.attr('data-category', this.category);
+  $('h1:contains("Title")').text(this.title);
+  $newArticle.attr('href', this.authorURL);
+  $('a:contains("Author Name")').text(this.author);
+  $('time:contains("Publish Time")').text(this.publishedOn);
+  $('.article-body').text(this.body);
 
   /*TODO: Now use jQuery to fill in the rest of the current template clone with properties from this particular Article instance.
   We need to fill in:
@@ -26,8 +31,9 @@ Article.prototype.toHtml = funtion() {
   $newArticle.find('time[pubdate]').attr('title', this.publishedOn);
   $newArticle.find('time').html('about ' + parseInt((new Date() - new Date(this.publishedOn))/60/60/24/1000) + ' days ago');
 
-  /* TODO: This clone article is no longer a template, as it now has real data attached to it!
+  /* DONE: This clone article is no longer a template, as it now has real data attached to it!
   We need to account for that before this current article gets rendered to our DOM */
+  $newArticle.attr('class', 'blog_entry');
 
   return(newArticle);
 };
