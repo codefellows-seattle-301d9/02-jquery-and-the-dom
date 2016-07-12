@@ -9,11 +9,12 @@ function Article (opts) {
   this.authorUrl = opts.authorUrl;
   this.publishedOn = opts.publishedOn;
   this.body = opts.body;
+  console.log('successfully calling construtor');
 }
 
 Article.prototype.toHtml = function() {
   var $newArticle = $('article.template').clone();
-
+  console.log('just cloned article.template');
 
   /* DONE */
   /* assign all elements that need to be assigned */
@@ -21,14 +22,14 @@ Article.prototype.toHtml = function() {
   $newArticle.find('time').html('about ' + parseInt((new Date() - new Date(this.publishedOn))) + ' days ago');
   $newArticle.find('address').html(this.author);
   $newArticle.find('address a').attr('href', this.authorUrl);
-  $newArticle.attr('h1', this.title);
-  $newArticle.attr('data-category', this.category);
-  $newArticle.attr('article-body', this.body);
+  $newArticle.find('h1').html(this.title);
+  $newArticle.find('h1').append('<h6> ' + this.category + ' </h6>');
+  $newArticle.find('section.article-body').html(this.body);
 
-  /* TODO : The clone article is no longer a template for it has real data
+  /* DONE : The clone article is no longer a template for it has real data
   attached to it. We need to account for that before this current article
   gets rendered to our DOM */
-
+  $newArticle.removeClass('template');
   return $newArticle;
 };
 

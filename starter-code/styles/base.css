@@ -23,6 +23,12 @@ address {
   display: inline-block;
 }
 
+h6 {
+  font-size: 1em;
+  padding: 0;
+  margin: 0;
+}
+
 /*LINK STYLES
 =======================================*/
 
